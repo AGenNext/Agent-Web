@@ -14,6 +14,61 @@ unit. **Repos, apps, services, vocabularies, devices, and the representatives of
 humans — all are agents.** Every repo is an agent; every agent is a box. One
 model for everything.
 
+## The theory: Intent → Action → Outcome (the trinity)
+
+The agent world is **outcome-driven** and **capability-mediated.** Its irreducible
+concept is a trinity:
+
+| | What | Verifiable? |
+|---|---|---|
+| **Intent** | the desired outcome — the goal/request, delegated (NL → declarative) | **declared** — the "why" (not provable, like the 4 Ds' *why*) |
+| **Action** | what is done to fulfil it — capabilities exercised via tools, composed as skills/flows | **verifiable** — capability-gated, signed (who/what/when/where) |
+| **Outcome** | the result — what actually happened, checked against the intent | **verifiable** — audited (the worldline) |
+
+- You **delegate intent.**
+- The agent **acts** — through the ability stack (language → capability → tool →
+  skill/flow), **authorized and gated** by the deterministic core.
+- The **outcome** is **verified and audited**, then checked against the intent.
+
+**The deterministic loop *is* this trinity:** intent in → move-next over the graph,
+exercising gated capabilities/tools → outcome verified and recorded.
+
+**Intent is declared; action and outcome are verified.** The gap between intent and
+outcome is where risk lives — **verification and audit measure and close it.** You
+can prove *what was done* and *what resulted*; you can only *declare* the *why*.
+That is the honest shape of a capability-outcome driven world: **delegate intent,
+act under capability, verify the outcome.**
+
+## How it progresses: unstructured → structured
+
+The agent's **reconciliation loop converts the unstructured into the structured.**
+That is its core work — and how the world progresses.
+
+- **Input — unstructured:** intent (natural language), raw data, the messy world.
+- **Loop — reconcile:** the deterministic loop interprets it, gates it through
+  capabilities, and reconciles it **against the schema and the agent-language.**
+- **Output — structured:** a **graph** (relationships) conforming to a **schema**
+  (shape), producing **outcomes** with **metrics** (measured, verified).
+
+| Concept | What |
+|---|---|
+| **Structure** | organized, canonical, machine-legible form (the goal-state) |
+| **Schema** | the structured *shape / types* — valid structure |
+| **Graph** | structured *relationships* — nodes + edges (flow · knowledge · agent network) |
+| **Metrics** | structured *measurements* — quantified, verified outcomes |
+
+Mapped to the trinity: **unstructured intent → structured action** (via the schema /
+agent-language / capabilities) **→ measured outcome** (metrics, verified). The loop
+**structures** intent into action and **measures** the outcome.
+
+And it is **continuous** — reconciliation re-structures against **drift** (the
+unstructured, the decay). Structure is **held and grown against entropy.**
+
+**That is how the world progresses:** the agent web converts the unstructured world
+into structured, machine-legible, actionable form — continuously, verifiably, one
+reconciliation loop at a time. **Progress = accumulated structure, held against
+drift.**
+
 ## What an agent is (the box)
 
 | Part | What | Standard |

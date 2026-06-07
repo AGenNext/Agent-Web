@@ -44,9 +44,38 @@ The motherboard is the **stable, deterministic control loop**: heartbeat →
 **move-next over the graph** → **verify** → execute → repeat.
 
 - **Deterministic. Stable. Fixed.** No probabilism in the control plane.
+- The **agent loop *is* the reconciliation loop** — it reconciles the current
+  state toward the **objective** (the declared desired outcome), converting
+  **unstructured → structured**, continuously (anti-drift).
+- **Stability = conformance with the graph.** The loop **verifies conformance
+  against the graph** (the canonical structure). **Anything that does not align
+  with the graph is *not stable*** — it is drift, to be **reconciled back or
+  rejected.** The graph is the conformance reference; the loop holds the system
+  conforming to it.
 - Runs on **FPGA (hardware determinism)** and/or **real-time Ubuntu (software
   determinism)**.
 - The **root of trust is off the surface** (secure element / enclave).
+
+### Steps — one at a time, each with an objective
+
+The loop proceeds **one step at a time** over the graph. Each **step** declares
+its own **objective** — the desired outcome of that step. Per step (the trinity,
+scoped to the step):
+
+1. **move-next** — pick the next step (deterministic).
+2. **set context** — establish the current state, **environment**, and inputs.
+3. **align** — agree on the **target environment + outcome** (the step's objective)
+   *before acting*. (Alignment-before-action is the trust gate.)
+4. **act** — exercise the step's capability via its tool (gated, signed).
+5. **outcome** — produce the result.
+6. **verify** — check the outcome against the aligned **target env + outcome**
+   (+ metrics).
+7. **advance** — objective met → move-next; else retry / handle / escalate.
+
+The overall **objective** decomposes into **per-step objectives**; the flow is a
+graph of objective-driven steps, traversed deterministically, **each verified
+before the next.** That is how the loop converges reliably — *one verified step at
+a time, toward the objective.*
 
 ## The box / sidecar partition
 
@@ -75,6 +104,16 @@ The manifest is **signed** → provenance of *who* defined it and *as what*.
 **Capability and governance are enforced deterministically by the core;** the
 **framework runs as a gated sidecar;** the **environment** is where it deploys.
 Define → sign → it becomes a box.
+
+**Domain is the scope.** A domain is the bounded region (subject · boundary ·
+valid inputs) within which an agent's **capabilities, environment, and authority
+apply.** Capabilities are scoped to a domain; the **environment** is the domain's
+runtime; **crossing a domain re-verifies** — the boundary is the trust edge.
+
+**Everything is contextual.** A **domain sits within a context.** Meaning, scope,
+validity, and even "native" are all set by **context** — which is why the
+agent-language uses the W3C **`@context`** to define what terms *mean*. Context
+frames; the domain scopes within it; the `@context` fixes the meaning.
 
 ### Capability — defined
 
@@ -133,6 +172,63 @@ interoperable (the agent-language). Capabilities are **scopable** (`git:*`,
 cross-product. Every capability = a signed VC: *subject (DID) may `git:push` on
 `repo:X` under caveats.* **Reuse, don't invent; namespace for meaning; scope for
 grants.** The full, source-cited catalog lives in [`CAPABILITIES.md`](CAPABILITIES.md).
+
+### Tools — the executable means
+
+A **capability** is the *authorization* (the right to do a verb on a resource — a
+signed VC). A **tool** is the *execution* — the callable function that performs
+it. **Capability authorizes; tool executes.**
+
+| Field | A tool declares |
+|---|---|
+| **name** | the verb it implements (e.g. `git:push`) — from the catalog |
+| **input** | parameters (JSON Schema) |
+| **output** | what it returns (JSON Schema) |
+| **requires** | the **capability** needed to invoke it (the authorization gate) |
+| **implementation** | **deterministic** (core) or **probabilistic** (sidecar / LLM), gated by the core |
+| **provenance** | signed — who provides the tool |
+
+**Tools are MCP tools** (the open standard: name · description · inputSchema) —
+**plus** capability-gating and signing. An agent's **surface** exposes its tools;
+each tool is **capability-gated**.
+
+**Invocation:** caller presents a **capability (VC)** → the kernel **verifies**
+(identity + provenance + capability + caveats) → the **tool executes** → the
+result is **audited**. A **flow** is a sequence of capability-gated tool
+invocations.
+
+**Action → Capability → Tool:** the **catalog** defines actions (verbs); a
+**capability** authorizes one (signed VC); a **tool** executes it (a gated MCP
+function). *Concept → authorization → execution.*
+
+### Language → Capability → Tool → Skill (the ability stack)
+
+Four layers, bottom to top — a linguistic hierarchy:
+
+| Layer | What it is | Analogy |
+|---|---|---|
+| **Agent language** | the canonical **vocabulary** of verbs + meaning (schema.org + namespaces — the catalog) | the **dictionary** |
+| **Capability** | a single **authorized** verb on a resource — a signed VC | a **word**, granted |
+| **Tool** | the **executable** means to perform a capability — an MCP function | **speaking** the word |
+| **Skill** | a **composition** of capabilities + tools into a higher-level, reusable ability | a **sentence** |
+
+- **Agent language** defines the words and their meaning.
+- A **capability** authorizes one word (signed VC), expressed *in* the agent-language.
+- A **tool** executes a capability (gated MCP function).
+- **A skill *is* a flow** — a named, signed, capability-gated composition of tool
+  invocations. Skills compose capabilities into reusable abilities.
+
+So: **catalog** (language) → **capabilities** (authorized words) → **tools**
+(execution) → **skills / flows** (compositions). *Vocabulary → words → speech →
+sentences.*
+
+**Official vs community skills:** a skill is **official** when the **governance /
+vocabulary agent certifies it** — conformant, signed by the platform, in the
+canonical catalog (the conformance mark, like "Certified Kubernetes"). A
+**community skill** is **author-signed and contributed** — usable and composable,
+but not platform-vouched. Both are real boxes; official ones carry the platform's
+conformance signature. *Compose, don't forge: a community skill may not claim to
+be official without certification.*
 
 ## Trust substrate (the box primitives)
 
