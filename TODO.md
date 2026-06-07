@@ -15,9 +15,9 @@ product.** Checked items are built and on PR #1.
 ## Phase 1 — Codegen & real standards
 
 - [x] **protoc codegen** — one proto → **Python + Go** generated (`make gen`); Rust/TS configured
-- [ ] Real **W3C DID** (replace bespoke fingerprints with DIDs)
+- [x] Real **W3C DID** — `did:key` (Ed25519): resolves to the key, verifies signatures (`agentweb/did.py`)
 - [ ] Real **W3C VC 2.0** for capabilities
-- [ ] **MCP** servers — expose agents as callable MCP tools
+- [x] **MCP server** — registry callable over JSON-RPC/stdio: register/discover/resolve/list (`agentweb/mcp_server.py`)
 - [ ] **DIDComm** (or mTLS) for the message layer
 
 ## Phase 2 — Build the agents (typed)
