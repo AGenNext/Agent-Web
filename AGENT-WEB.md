@@ -121,6 +121,15 @@ or secure what you cannot identify. So **everything is identified and recorded**
 (even untrusted identities — you record the threat too); **only the trusted are
 interacted with.** *Identification ≠ trust: record all; engage the verified.*
 
+**No orphans.** Every thing is **connected, owned, recorded, and accountable** —
+**no orphan nodes** (every node is in the graph, with provenance and an id
+record), **no dangling artifacts** (every box signed and registered, never
+dangling), **no unowned resources or processes.** **An orphan is a security risk** — an
+untracked thing you cannot govern or secure, exactly where attacks hide (orphan
+processes, dangling images, unowned resources, abandoned keys). The reconciliation
+loop leaves **no orphans:** everything is **connected/owned or gracefully
+retired.** On retirement, dependents are reconciled — **never orphaned.**
+
 ## What an agent is (the box)
 
 | Part | What | Standard |
