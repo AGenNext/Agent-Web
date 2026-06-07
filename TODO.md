@@ -14,7 +14,7 @@ product.** Checked items are built and on PR #1.
 
 ## Phase 1 — Codegen & real standards
 
-- [ ] Wire **buf / protoc** — generate Rust · Go · TS · Python from `agentweb.proto`
+- [x] **protoc codegen** — one proto → **Python + Go** generated (`make gen`); Rust/TS configured
 - [ ] Real **W3C DID** (replace bespoke fingerprints with DIDs)
 - [ ] Real **W3C VC 2.0** for capabilities
 - [ ] **MCP** servers — expose agents as callable MCP tools
@@ -58,7 +58,7 @@ product.** Checked items are built and on PR #1.
 
 ## Housekeeping
 
-- [ ] **Top-level README** — make it the Agent Web front door (still Orb-led)
+- [x] **Top-level README** — Agent Web front door + index of all docs
 - [ ] **`GRAPH.md`** — the concrete current graph schema
 - [ ] Index all docs from the README
 
