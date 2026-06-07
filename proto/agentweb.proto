@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package agentweb;
 
+option go_package = "github.com/AGenNext/Agent-Web/gen/go/agentwebpb";
+
 // The Agent Web contracts, defined language-neutrally in Protocol Buffers.
 // Define once here; GENERATE native code per layer:
 //   Rust  -> core / kernel        Go -> runtime        JS/TS -> surface
