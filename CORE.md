@@ -37,6 +37,18 @@ and **source ref** (the existing standard it reuses — *reuse, don't invent*).
 - **Source ref** — **OCI** (container) / **snap**; **microservice**; **CNCF**;
   Lego-brick composability (sealed + studs).
 
+## Fabric
+
+- **Term** — the **connective substrate** that weaves all agents into one **mesh**:
+  identity (DID) + transport (every protocol) + trust (zero-trust, trust-scored) +
+  discovery (registry) + shared state (the graph store). The fabric is the **live
+  medium the graph lives in** — the mesh *and* the data layer, woven as one.
+  (Graph = the structure; fabric = the connective tissue that carries it.)
+- **Contract** — `{ transport: MCP|HTTP|DIDComm, identity: DID, trust: trust_score, discovery: registry, state: SurrealDB(graph), policy: zero-trust }`
+- **Source ref** — **service mesh** (Istio / Linkerd / Envoy — data + control plane);
+  **SPIFFE/SPIRE** (identity fabric); **data fabric** (SurrealDB / Microsoft Fabric);
+  **CNCF**.
+
 ## Kernel
 
 - **Term** — the **deterministic core** every agent runs on: genesis root, identity,
