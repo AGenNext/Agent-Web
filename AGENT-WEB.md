@@ -69,6 +69,58 @@ into structured, machine-legible, actionable form — continuously, verifiably, 
 reconciliation loop at a time. **Progress = accumulated structure, held against
 drift.**
 
+### The graph keeps expanding
+
+The graph is **living, not frozen.** As agents reconcile unstructured → structured
+— adding capabilities, joining domains, structuring new knowledge — **the graph
+keeps expanding.** Growth *is* progress.
+
+But growth is **governed**, and that is the key distinction:
+
+- **Expansion** — *conformant, governed* additions: new nodes/edges validated by
+  the governance agent, no contradictions, versioned, without breaking existing
+  conformance. **This is progress.**
+- **Drift** — *non-conformant, ungoverned* change. Rejected or reconciled back.
+
+So **the graph expands by conformant growth and is held against drift.** Both
+change the graph; one is governed progress, the other is decay. Stability is
+**conformance with the *current, growing* graph** — dynamic, not frozen. The
+graph never stops expanding; it only refuses to expand *non-conformantly.*
+
+### Nodes are identities; interaction is trust-scored
+
+- **A node is an identity** — every node in the graph is an agent's **DID.**
+- **Node creation is open** — identity is self-sovereign; **any new identity can
+  create a node.** The graph is permissionless to *join.*
+- **But interaction is trust-scored** — you do **not** trust every node equally.
+  **Every interaction (edge · capability grant · message) is gated by the
+  counterparty's *trust score*.**
+
+**Trust is earned, not granted by existence.** A node's **trust score** is built
+from:
+
+- **provenance** — verifiable lineage (chain to a trusted root; attestations),
+- **reputation** — past outcomes and audit history (did it deliver? conform?),
+- **attestations** — VCs vouching for it (web of trust),
+- **conformance** — alignment with the graph (non-conformance lowers it).
+
+This resolves **open vs safe:** **open to create a node (permissionless),
+trust-scored to interact (earned).** Sybil / fake identities are cheap to *create*
+but earn *low trust* — so they get limited interaction. **Zero-trust verifies**
+every interaction cryptographically; the **trust score weights** how much to
+engage after verifying. *Verify the identity; weight the interaction by trust.*
+
+**Identify everything; interact selectively.** When a new identity appears:
+
+- **always create an *id record*** — record the identity in the graph (known,
+  tracked, auditable),
+- **but do not interact** until trust is established (trust-scored).
+
+**Identification is necessary for governance and security** — you cannot govern
+or secure what you cannot identify. So **everything is identified and recorded**
+(even untrusted identities — you record the threat too); **only the trusted are
+interacted with.** *Identification ≠ trust: record all; engage the verified.*
+
 ## What an agent is (the box)
 
 | Part | What | Standard |
