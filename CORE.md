@@ -37,6 +37,34 @@ and **source ref** (the existing standard it reuses — *reuse, don't invent*).
 - **Source ref** — **OCI** (container) / **snap**; **microservice**; **CNCF**;
   Lego-brick composability (sealed + studs).
 
+## Kernel
+
+- **Term** — the **deterministic core** every agent runs on: genesis root, identity,
+  the **verify** gate, capability-gating, audit, the reconciliation loop.
+  Always-verify, default-deny. The motherboard.
+- **Contract** — `{ genesis: DID, route(message, capability) → result, verify, audit_log, loop }`
+- **Source ref** — **OS kernel** (ring 0 / privilege separation); **Kubernetes
+  control plane**; **`autonomyx`** (this repo's kernel).
+
+## Runtime
+
+- **Term** — the **execution environment** that runs the box — runtime-native,
+  portable, sealed. Where the agent *executes*.
+- **Contract** — `{ image, exec, isolation, surface, resources }`
+- **Source ref** — **OCI / containerd / CRI**; **WASM** runtime; **snap**; the
+  language runtime.
+
+## Framework
+
+- **Term** — the **execution / reasoning framework** the agent uses — the
+  (probabilistic) sidecar that does the thinking, **gated by the kernel.**
+- **Contract** — `{ kind, model, tools, gated_by: kernel }`
+- **Source ref** — **AG2 / AutoGen**, **MAGUS**, LangChain (multi-agent frameworks);
+  LLM runtimes (llama.cpp / GGUF).
+
+**For every build:** **kernel** (deterministic core) + **runtime** (execution) +
+**framework** (reasoning). Every agent = **kernel · runtime · framework.**
+
 ---
 
 **Every definition carries a source ref** — reuse the open standard, don't invent.
