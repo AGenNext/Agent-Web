@@ -20,6 +20,12 @@ websites, platforms** — each re-formed as an **agent**:
 The existing internet **becomes** the agent mesh — every device, site, and
 platform an agent-operated node.
 
+**An agent is an operator.** It *operates* its node, reconciling it toward its
+objective — the **Kubernetes Operator** pattern (a controller reconciling a
+resource), generalized to the whole web. This is the most **stable, efficient,
+real-world** definition of an agent: not a chatbot, not a script — an **operator**
+of a node.
+
 This is the unifying model — a "theory of everything" for the agent world: **one
 consistent model for every entity.**
 

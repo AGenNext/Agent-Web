@@ -8,7 +8,11 @@ detail in [`AGENT-WEB.md`](AGENT-WEB.md), [`ARCHITECTURE.md`](ARCHITECTURE.md),
 
 - **Agent Web** — the **Internet of Agents**: a global network where everything is
   an agent, connected over the open web.
-- **Agent** — an entity in the agent web; **a box**. Everything is an agent.
+- **Agent** — an entity in the agent web; **a box**. **An agent is an operator** —
+  it *operates* a node (device · website · platform), **reconciling it toward its
+  objective**. *Source ref:* the **Kubernetes Operator** pattern (a controller that
+  reconciles a resource), generalized. This is the most **stable, efficient,
+  real-world** definition. Everything is an agent.
 - **Box** — the canonical unit: a **sealed, signed, identifiable, callable** unit.
   Sealed substance, generative interface. Real, accountable, portable, sovereign.
 - **The web** — the substrate and **home of everything**: information, standards
