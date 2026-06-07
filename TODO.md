@@ -16,7 +16,7 @@ product.** Checked items are built and on PR #1.
 
 - [x] **protoc codegen** — one proto → **Python + Go** generated (`make gen`); Rust/TS configured
 - [x] Real **W3C DID** — `did:key` (Ed25519): resolves to the key, verifies signatures (`agentweb/did.py`)
-- [ ] Real **W3C VC 2.0** for capabilities
+- [x] Real **W3C VC 2.0** — issue + verify signed credentials (`agentweb/vc.py`)
 - [x] **MCP server** — registry callable over JSON-RPC/stdio: register/discover/resolve/list (`agentweb/mcp_server.py`)
 - [ ] **DIDComm** (or mTLS) for the message layer
 

@@ -161,6 +161,24 @@ register** (never dangling) **→ deploy** (edge ↔ cloud).
 **DID** · **VC 2.0** · **DIDComm** · **schema.org / `@context`** · **OCI** · **SLSA** ·
 **Sigstore** · **SPIFFE** · **MCP** · **k0s / k8s** · **Ubuntu / snaps**.
 
+## More terms
+
+- **Resource** — what a capability acts *on*; addressed by URI / DID-URL.
+- **Surface** — how an agent is **called / presented**: MCP/API (machines), UI
+  (humans) — native per touchpoint.
+- **Policy** — the **governance rules** an agent runs under: default-deny + allowed
+  + auditable constraints.
+- **Manifest** — the **signed declaration** that makes a thing an agent (capability ·
+  environment · governance · framework + type + surface).
+- **Mesh** — the **topology** of trust-scored connections between agents (the
+  fabric's connective form).
+- **Reconciliation** — the loop's act of **converging state** to conformance with
+  the graph and the objective.
+- **Fabric** — the connective substrate (mesh + state) the graph lives in — see
+  [`CORE.md`](CORE.md).
+- **Trust score · reputation · attestation · conformance · provenance · audit** —
+  see [`TRUST.md`](TRUST.md).
+
 ---
 
 **Agent Web = the Internet of Agents.** Everything is an agent (a box). The web is
