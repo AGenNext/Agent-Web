@@ -1,3 +1,7 @@
+> **This repository contains two independent projects:**
+> 1. **`orb_mini/`** — a reference implementation of the Orb neural network potential (below).
+> 2. **`autonomyx/`** — a zero-trust kernel for a canonical agent OS. See [the autonomyx section](#autonomyx--a-zero-trust-kernel-for-a-canonical-agent-os).
+
 # mini-Orb
 
 A compact, **runnable** reference implementation of the core ideas in:
@@ -175,3 +179,68 @@ max |E(x) - E(Rx)| on an untrained net = 4.40e-06  (small but nonzero)
   [Introducing the Orb AI-based interatomic potential](https://www.orbitalindustries.com/posts/technical-blog-introducing-the-orb-ai-based-interatomic-potential)
 - Batzner et al., *NequIP* (E(3)-equivariant baseline) —
   [arXiv:2101.03164](https://arxiv.org/abs/2101.03164)
+
+---
+
+# autonomyx — a zero-trust kernel for a canonical agent OS
+
+`autonomyx/` is a minimal, runnable substrate for **agent-to-agent systems**
+where trust is never assumed. It operationalizes the infrastructure that
+Rothschild et al. (*Guiding the AI Disruption to the Good Place*, 2026) name as
+the binding constraint on **Stage 3 "Reconstruction"**: trust & accountability,
+machine-legible interoperability, and governance compiled into the workflow as
+**auditable constraints** rather than bolted on afterward.
+
+The design fuses **same-origin** trust with **zero-trust** enforcement by
+redefining "origin" as *cryptographic lineage* rather than network location:
+the only thing that confers trust is a provable chain back to the **canonical
+core**, re-verified on every interaction.
+
+### Native primitives
+| Primitive | What it is | Module |
+|---|---|---|
+| **Identity** | An Ed25519 keypair; its fingerprint is the entity's origin id | `identity.py` |
+| **Provenance** | Signed certificate chains proving same-origin lineage to the root | `provenance.py` |
+| **Capability** | Unforgeable, scoped, caveated grants (object-capability authz) | `capability.py` |
+| **Message** | The only interaction: a signed, addressed, tamper-evident envelope | `message.py` |
+| **Agent** | identity + provenance chain + domain + handler | `agent.py` |
+| **Kernel** | The canonical core: genesis root, registration, **default-deny** routing + audit | `kernel.py` |
+
+### The one rule: `Kernel.route` is always-verify, default-deny
+Every message passes the same gauntlet — (1) sender signature, (2) certificate
+chain back to genesis, (3) recipient exists, (4) a capability authorizes
+`(action, resource)` and its caveats hold — then is delivered and **audited**.
+No step is skippable; there is no implicit trust from being "inside."
+
+### Quickstart
+```bash
+pip install cryptography
+python examples/agent_demo.py            # agent-to-agent market with an audit trail
+python -m pytest tests/test_kernel.py -q  # 11 passing
+```
+
+Demo output (abridged):
+```
+quote    -> {'item': 'widget', 'unit_price': 4.2, ...}
+purchase -> {'order': 'widget', 'qty': 3, 'total': 12.6, 'status': 'confirmed'}
+second purchase     -> DENIED: capability ... exhausted (1 calls)
+out-of-scope purchase -> DENIED: no capability authorizes purchase on gadget
+
+--- audit log ---
+  allow  quote    widget    authorized
+  allow  purchase widget    authorized
+  deny   purchase widget    capability ... exhausted (1 calls)
+  deny   purchase gadget    capability does not cover action
+```
+
+### Scope & honest limits
+A teaching-grade reference, not production: in-memory registry/audit (no
+persistence), a single genesis root (no threshold/decentralized root or
+revocation lists yet), no transport layer or replay-cache across processes, and
+domains are recorded but cross-domain policy beyond capabilities is left open.
+The primitives are the point; hardening is future work.
+
+### References
+- Rothschild, Hofman, Mobius, Lucier, et al., *Guiding the AI Disruption to the
+  Good Place* (Microsoft Research), 2026 — [arXiv:2605.29207](https://arxiv.org/abs/2605.29207)
+- Rothschild et al., *The Agentic Economy*, Communications of the ACM, 2026
