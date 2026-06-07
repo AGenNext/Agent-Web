@@ -66,6 +66,11 @@ act under capability, verify the outcome.**
 The agent's **reconciliation loop converts the unstructured into the structured.**
 That is its core work — and how the world progresses.
 
+**The graph *is* the loop.** The graph is the **structure**; the loop is the
+**process** that traverses and produces it — they are **one thing.** The loop is
+the graph in motion; the graph is the loop's state. Structure and process,
+inseparable.
+
 - **Input — unstructured:** intent (natural language), raw data, the messy world.
 - **Loop — reconcile:** the deterministic loop interprets it, gates it through
   capabilities, and reconciles it **against the schema and the agent-language.**
