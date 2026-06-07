@@ -4,6 +4,22 @@
 *things*, the Agent Web connects **agents** — autonomous, signed, callable,
 capability-bearing entities — over the open web.
 
+We are defining a world where **the internet is a mesh** — a zero-trust,
+identity-based, every-protocol fabric — and **each node is operated by an agent.**
+Every node is an agent; every connection is a **trust-scored, capability-gated,
+signed** interaction. The mesh is the network; the agents are the nodes.
+
+The nodes are the things that **already make up the internet — devices,
+websites, platforms** — each re-formed as an **agent**:
+
+- **Devices** → device agents (edge / gateway / service; the box on real hardware).
+- **Websites** → website agents (app / gateway; each site an agent — capabilities,
+  callable, signed).
+- **Platforms** → platform agents (host and arrange other agents).
+
+The existing internet **becomes** the agent mesh — every device, site, and
+platform an agent-operated node.
+
 This is the unifying model — a "theory of everything" for the agent world: **one
 consistent model for every entity.**
 
