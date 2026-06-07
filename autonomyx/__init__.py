@@ -19,6 +19,15 @@ from .kernel import AuditRecord, Kernel
 from .message import Message, make_message
 from .provenance import Certificate, issue_certificate, verify_chain
 from .util import AuthorizationError, KernelError, ProvenanceError, VerificationError
+from .flow import (
+    Step,
+    SignedFlow,
+    build_flow,
+    verify_flow,
+    FlowRunner,
+    FlowError,
+    FlowExpired,
+)
 
 __all__ = [
     "Identity",
@@ -37,4 +46,11 @@ __all__ = [
     "VerificationError",
     "ProvenanceError",
     "AuthorizationError",
+    "Step",
+    "SignedFlow",
+    "build_flow",
+    "verify_flow",
+    "FlowRunner",
+    "FlowError",
+    "FlowExpired",
 ]
