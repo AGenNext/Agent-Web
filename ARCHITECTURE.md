@@ -117,9 +117,22 @@ one: **schema.org `Action`** (a canonical, widely-adopted action hierarchy) —
 - **Acknowledge / Confirm** · **Subscribe / Stream / Notify**
 - **Authenticate / Authorize / Verify** · **Negotiate** · **Delegate** · **Audit / Log**
 
-Every capability's `action` references one of these (a canonical `schema:` URL or
-a machine-command id) → unambiguous, interoperable meaning. **Don't invent the
-vocabulary — integrate the open one (schema.org) and extend it for machines.**
+**Plus developer, container, and content verbs (reuse existing command sets):**
+
+- **`git:`** — clone · fork · branch · checkout · commit · push · pull · merge · rebase · tag · release · issue · pull-request · review · approve · comment
+- **`docker:`** — build · run · pull · push · tag · exec · start · stop · restart · logs · inspect · compose · prune
+- **`content:`** — write · draft · edit · revise · generate · summarize · translate · format · render · annotate · proofread · publish
+- **`security:`** — scan · protect · shield · guard · detect · isolate · quarantine · encrypt · sign · verify · attest · monitor · patch · harden · sandbox · revoke · block · allow · deny
+
+**Principle: every action is a capability** — a **common English verb** on a
+resource. The vocabulary is the **union of existing open command sets**
+(schema.org · git · docker · k8s · http · data · fs · content · security ·
+machine), each **namespaced** (`namespace:verb`) so its meaning is canonical and
+interoperable (the agent-language). Capabilities are **scopable** (`git:*`,
+`docker:build` on `resource:X`) — grant scoped verb-on-resource, not an enumerated
+cross-product. Every capability = a signed VC: *subject (DID) may `git:push` on
+`repo:X` under caveats.* **Reuse, don't invent; namespace for meaning; scope for
+grants.** The full, source-cited catalog lives in [`CAPABILITIES.md`](CAPABILITIES.md).
 
 ## Trust substrate (the box primitives)
 
