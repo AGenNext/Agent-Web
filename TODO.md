@@ -51,7 +51,7 @@ product.** Checked items are built and on PR #1.
 
 ## Phase 6 — Deploy & platform
 
-- [ ] **k0s** (edge) / **k8s** (network) deployment
+- [x] **k8s deploy artifacts** — HTTP surface + Dockerfile + Deployment/Service (non-root, probes); verified locally. *Cluster `apply` pending a real cluster.*
 - [ ] Single-artifact delivery (snap / k0s-style box)
 - [ ] **App store** + packaging (all formats)
 - [ ] Hardware path: FPGA core + secure-element root of trust (later)
