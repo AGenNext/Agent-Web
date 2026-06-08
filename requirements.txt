@@ -1,0 +1,8 @@
+# mini-Orb (orb_mini/) — neural network potential reference
+torch>=2.0
+# numpy is pulled in by torch; pytest is only needed to run the test suite.
+
+# autonomyx/ — zero-trust agent kernel (Ed25519 signatures)
+cryptography>=41.0
+
+pytest>=7.0

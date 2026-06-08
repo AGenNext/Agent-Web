@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+package agentweb;
+
+option go_package = "github.com/AGenNext/Agent-Web/gen/go/agentwebpb";
+
+// The Agent Web contracts, defined language-neutrally in Protocol Buffers.
+// Define once here; GENERATE native code per layer:
+//   Rust  -> core / kernel        Go -> runtime        JS/TS -> surface
+// Source refs: W3C DID, W3C VC 2.0, schema.org, OCI, k0s/k8s, MCP.
+
+// ---- primitives -----------------------------------------------------------
+
+// A Decentralized Identifier — the identity of every node/agent. (W3C DID)
+message DID { string value = 1; } // e.g. "did:web:agent.example"
+
+message Caveats {
+  int64 expires_at = 1;
+  int32 max_calls = 2;
+  map<string, string> conditions = 3;
+}
+
+// ---- capability (= W3C Verifiable Credential 2.0) -------------------------
+
+message Capability {
+  string context = 1;   // @context — the agent-language (schema.org + namespaces)
+  DID issuer = 2;
+  DID subject = 3;
+  string action = 4;    // namespace:verb (from the catalog)
+  string resource = 5;  // URI / DID-URL
+  Caveats caveats = 6;
+  bytes proof = 7;      // signature (issuer DID)
+}
+
+// ---- tool (= MCP function) ------------------------------------------------
+
+message Tool {
+  string name = 1;          // namespace:verb (the capability it implements)
+  string input_schema = 2;  // JSON Schema
+  string output_schema = 3; // JSON Schema
+  string requires = 4;      // capability id (the authorization gate)
+  enum Impl { DETERMINISTIC = 0; PROBABILISTIC = 1; }
+  Impl implementation = 5;
+  bytes proof = 6;
+}
+
+// ---- step / skill / flow --------------------------------------------------
+
+message Step {
+  string objective = 1;            // desired outcome of the step
+  string action = 2;               // capability + tool
+  map<string, string> target = 3;  // aligned env + outcome
+}
+
+message Flow { // a skill is a flow
+  string name = 1;
+  DID author = 2;
+  repeated Step steps = 3;
+  repeated string requires = 4;    // capabilities
+  bool official = 5;               // platform-certified vs community
+  int64 expires_at = 6;
+  bytes proof = 7;
+}
+
+// ---- message (the only interaction) ---------------------------------------
+
+message Envelope {
+  DID sender = 1;
+  DID recipient = 2;
+  string action = 3;     // namespace:verb
+  string resource = 4;   // URI
+  bytes payload = 5;
+  string nonce = 6;
+  int64 timestamp = 7;
+  bytes proof = 8;       // signature (sender DID)
+}
+
+// ---- graph: node + edge ---------------------------------------------------
+
+message Node {
+  DID id = 1;
+  string type = 2;       // platform|vocabulary|identity|registry|service|app|gateway
+  double trust_score = 3;
+  repeated string capabilities = 4;
+  string surface = 5;    // MCP / API endpoint
+  bytes provenance = 6;
+}
+
+message Edge {
+  enum Type {
+    GRANTS = 0; CALLS = 1; TRUSTS = 2; DERIVES_FROM = 3;
+    COMPOSES = 4; IN_DOMAIN = 5; CONFORMS_TO = 6;
+  }
+  Type type = 1;
+  DID from = 2;
+  string to = 3;         // DID or resource
+  double weight = 4;     // trust
+  bytes proof = 5;
+}
+
+message Graph {
+  repeated Node nodes = 1;
+  repeated Edge edges = 2;
+  string schema_context = 3; // @context
+  string version = 4;
+}
+
+// ---- agent (the box) ------------------------------------------------------
+
+message Agent {
+  DID id = 1;
+  string type = 2;
+  repeated string provides = 3;   // capabilities provided
+  repeated string requires = 4;   // capabilities required
+  string environment = 5;         // domain · runtime · resources
+  string governance = 6;          // policy
+  string framework = 7;
+  string surface = 8;             // MCP / API
+  double trust_score = 9;
+  bytes provenance = 10;
+  bytes proof = 11;
+}
+
+// ---- the registry agent (DNS of the agent web) — its callable surface -----
+
+service Registry {
+  rpc Register (Node) returns (RegisterResult);
+  rpc Discover (DiscoverQuery) returns (DiscoverResult);
+  rpc Resolve (DID) returns (Node);
+  rpc List (ListQuery) returns (NodeList);
+}
+message RegisterResult { DID id = 1; bool ok = 2; }
+message DiscoverQuery { string type = 1; string capability = 2; }
+message DiscoverResult { repeated DID matches = 1; }
+message ListQuery {}
+message NodeList { repeated DID nodes = 1; }

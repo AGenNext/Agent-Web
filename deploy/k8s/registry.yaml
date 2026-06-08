@@ -1,0 +1,53 @@
+# Kubernetes deployment for the registry agent (HTTP surface).
+# Secrets are NEVER hardcoded — inject via a k8s Secret + envFrom (example below).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agentweb-registry
+  labels: { app: agentweb-registry }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: agentweb-registry }
+  template:
+    metadata:
+      labels: { app: agentweb-registry }
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile: { type: RuntimeDefault }
+      containers:
+        - name: registry
+          image: agentweb-registry:latest   # build: docker build -t agentweb-registry:latest .
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+          # Secrets (if ever needed) come from a k8s Secret, not the image:
+          # envFrom:
+          #   - secretRef: { name: agentweb-secrets }
+          readinessProbe:
+            httpGet: { path: /healthz, port: 8080 }
+            initialDelaySeconds: 2
+          livenessProbe:
+            httpGet: { path: /healthz, port: 8080 }
+            initialDelaySeconds: 5
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { cpu: 250m, memory: 128Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agentweb-registry
+spec:
+  selector: { app: agentweb-registry }
+  ports:
+    - port: 80
+      targetPort: 8080
